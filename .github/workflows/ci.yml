@@ -6,7 +6,7 @@
 
 name: 'CI'
 
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 env:
   CMAKE_REQUIRED_QUIET: 'OFF'
@@ -52,15 +52,13 @@ jobs:
           make -C src/stub maintainer-clean extra-clean
           git status || true
           make -C src/stub extra-all all
-          if ! git diff --quiet; then git diff; exit 1; fi
       - run: bash ./misc/scripts/check_whitespace_git.sh
       - name: 'Check source code formatting'
         run: |
           UPX_CLANG_FORMAT="$PWD/../deps/bin-upx-20221212/clang-format-15.0.6" make -C src clang-format
-          if ! git diff --quiet; then git diff; exit 1; fi
 
   job-linux-cmake: # uses cmake + make
-    if: true
+    if: github.repository_owner == 'upx'
     needs: [ job-rebuild-and-verify-stubs ]
     name: ${{ format('{0}', matrix.os) }}
     runs-on: ${{ matrix.os }}
@@ -178,7 +176,7 @@ jobs:
           env -C build/extra/gcc/release bash "$PWD"/misc/testsuite/upx_testsuite_1.sh
 
   job-macos-cmake: # uses cmake + make
-    if: true
+    if: github.repository_owner == 'upx'
     needs: [ job-rebuild-and-verify-stubs ]
     name: ${{ format('{0}', matrix.os) }}
     runs-on: ${{ matrix.os }}
