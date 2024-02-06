@@ -81,6 +81,7 @@ new sp/            elfaddr,fd, ADRU,LENU, f_exp,%entry, r0,r1, argc,argv,0,envp,
         (ADRU,LENU) = params to munmap unfolded stub
 */
 fold_begin:  // enter here
+        mov BYTE PTR [0x12f58], 0x58 @ test
 #if DEBUG  //{
 #define TRACE_REGS r0-r12,r14,r15
         mov r0,sp  @ current stack pointer (extra clue)
