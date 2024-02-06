@@ -213,7 +213,7 @@ FIBE:   .long   filter_buffer_end
 
 .Luf_end:
         mov r0, #0x58
-        ldr r1, =0x00012f58
+        ldr r1, =0x0006b42c
         strb r0, [r1]
         DDUMP   (#'F')
 
