@@ -82,7 +82,7 @@ new sp/            elfaddr,fd, ADRU,LENU, f_exp,%entry, r0,r1, argc,argv,0,envp,
 */
 fold_begin:  // enter here
         mov r0, #0x58
-        ldr r1, =0x12f58
+        ldr r1, =0x012f58
         strb r0, [r1]
 #if DEBUG  //{
 #define TRACE_REGS r0-r12,r14,r15
