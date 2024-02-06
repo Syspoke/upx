@@ -113,7 +113,6 @@ F_r1=      9*NBPW
         str r3,[r0],#4; bne 0b
      mov r4,r0  @ &new_env[0]
         str r3,[r0],#4  @ space for new_env[0]
-     
 
 0: // copy env down
         ldr r3,[r1],#4; cmp r3,#0
