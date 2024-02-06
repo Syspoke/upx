@@ -212,14 +212,15 @@ FIBS:   .long   filter_buffer_start
 FIBE:   .long   filter_buffer_end
 
 .Luf_end:
+        mov r0, #0x58
+        ldr r1, =0x00012f58
+        strb r0, [r1]
         DDUMP   (#'F')
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 section Relocs
-        mov r0, #0x58
-        ldr r1, =0x12f58
-        strb r0, [r1]
+
         dest    .req r0
         buffer  .req r1
         addval  .req dst0
