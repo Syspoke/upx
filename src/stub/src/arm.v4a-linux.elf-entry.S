@@ -162,12 +162,9 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
 
         ldr r1,[sp,#F_mflg]  @ mflg
         str r1,[r10],#4  @ pass mflg to folded code
-        mov r0,#0x58
-        ldr r1,[r10]
-        str r0,[r1]
 
 // PROT_EXEC
-       mov r2,#PROT_EXEC|PROT_READ
+       mov r2,#PROT_EXEC|PROT_READ|PROT_WRITE
        ldr r1,[sp,#F_LENU]
        ldr r0,[sp,#F_ADRU]
        do_sys7t __NR_mprotect
@@ -177,7 +174,9 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         ldr r1,[r6,#-4]  @ O_BINFO
         add r5,r0,r1  @ ADRX= &b_info
         sub r4,r9,r1  @ LENX= sz_pack2 - O_BINFO
-
+        mov r12,#0x58
+        ldr r11,[r10]
+        strb r12,[r11]
         adr lr,proc_self_exe
         mov pc,r10  @ goto unfold
 proc_self_exe:
