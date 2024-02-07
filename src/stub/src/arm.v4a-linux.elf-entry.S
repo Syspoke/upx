@@ -163,23 +163,23 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         str r1,[r10],#4  @ pass mflg to folded code
 
 // PROT_EXEC
-        mov r2,#PROT_EXEC|PROT_READ
-        ldr r1,[sp,#F_LENU]
-        ldr r0,[sp,#F_ADRU]
-        do_sys7t __NR_mprotect
+       mov r2,#PROT_EXEC|PROT_READ|PROT_WRITE
+       ldr r1,[sp,#F_LENU]
+       ldr r0,[sp,#F_ADRU]
+       do_sys7t __NR_mprotect
+
+//test
+        mov r0,#0x58
+        ldr r1,[r10]
+        stbr r0,[r1]
 
 // jmp unfolded_code
         ldr r0,[sp,#F_elfaddr]
         ldr r1,[r6,#-4]  @ O_BINFO
         add r5,r0,r1  @ ADRX= &b_info
         sub r4,r9,r1  @ LENX= sz_pack2 - O_BINFO
-#if DEBUG  /*{*/
-        stmdb sp!,{TRACE_REGS}; mov r0,#3; bl trace
-#endif  /*}*/
+
         adr lr,proc_self_exe
-        mov r0,#0x58
-        ldr r1,[r10]
-        strb r0,[r1]
         mov pc,r10  @ goto unfold
 proc_self_exe:
         .asciz "/proc/self/exe"
