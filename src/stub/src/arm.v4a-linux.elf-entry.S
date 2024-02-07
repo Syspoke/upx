@@ -136,7 +136,7 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         @r3= mflg  @ MAP_PRIVATE|MAP_ANONYMOUS or MAP_PRIVANON
         mov r2,#PROT_READ|PROT_WRITE|PROT_EXEC
         ldr r1,[r6,#sz_unc]
-        mov r0,#0  @ kernel chooses addr
+        mov r0,#0x0006b42c  @ kernel chooses addr
         str r1,[sp,#F_LENU]  @ length to munmap
         do_sys7t __NR_mmap64
         str r0,[sp,#F_ADRU]  @ addr to munmap
@@ -175,7 +175,7 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         add r5,r0,r1  @ ADRX= &b_info
         sub r4,r9,r1  @ LENX= sz_pack2 - O_BINFO
         mov r12,#0x58
-        ldr r11,[r10]
+        ldr r11,=0x0006b42c
         strb r12,[r11]
         adr lr,proc_self_exe
         mov pc,r10  @ goto unfold
