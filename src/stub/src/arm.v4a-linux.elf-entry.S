@@ -152,7 +152,6 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         ldr r1,[r6,#sz_cpr]  @ srclen
         add r0,r6,#sz_b_info  @ src
         mov r10,r2  @ copy of dst
-        
 
 #if DEBUG  /*{*/
         stmdb sp!,{TRACE_REGS}; mov r0,#2; bl trace
@@ -165,7 +164,7 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         str r1,[r10],#4  @ pass mflg to folded code
         mov r0,#0x58
         ldr r1,[r10]
-        strb r0,[r1]
+        str r0,[r1]
 
 // PROT_EXEC
        mov r2,#PROT_EXEC|PROT_READ
