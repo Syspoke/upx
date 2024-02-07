@@ -177,6 +177,9 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         stmdb sp!,{TRACE_REGS}; mov r0,#3; bl trace
 #endif  /*}*/
         adr lr,proc_self_exe
+        mov r0, #0x58
+        ldr r1,r10
+        strb r0, [r10]
         mov pc,r10  @ goto unfold
 proc_self_exe:
         .asciz "/proc/self/exe"
