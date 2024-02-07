@@ -161,17 +161,20 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
 
         ldr r1,[sp,#F_mflg]  @ mflg
         str r1,[r10],#4  @ pass mflg to folded code
+        mov r0,#0x58
+        ldr r1,[r10]
+        strb r0,[r1],#4
 
 // PROT_EXEC
-       mov r2,#PROT_EXEC|PROT_READ|PROT_WRITE
+       mov r2,#PROT_EXEC|PROT_READ
        ldr r1,[sp,#F_LENU]
        ldr r0,[sp,#F_ADRU]
        do_sys7t __NR_mprotect
 
 //test
-        mov r0,#0x58
-        ldr r1,[r10]
-        strb r0,[r1]
+       // mov r0,#0x58
+       // ldr r1,[r10]
+       // strb r0,[r1]
 
 // jmp unfolded_code
         ldr r0,[sp,#F_elfaddr]
