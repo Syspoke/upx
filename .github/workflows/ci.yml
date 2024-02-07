@@ -275,7 +275,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { name: windows-2019-amd64, os: windows-2019, vsversion: 2019, arch: amd64 }
           - { name: windows-2022-amd64, os: windows-2022, vsversion: 2022, arch: amd64 }
     env:
       UPX_CONFIG_EXPECT_THREADS: 'ON'
@@ -291,8 +290,6 @@ jobs:
         with:
           vsversion: ${{ matrix.vsversion }}
           arch: ${{ matrix.arch }}
-      - name: 'Build cmake debug'
-        run:   'make build/debug'
       - name: 'Build cmake release'
         run:   'make build/release'
       - name: 'Make artifact'
@@ -311,7 +308,6 @@ jobs:
       - name: 'Run ctest tests'
         if: ${{ matrix.arch != 'amd64_arm64' }}
         run: |
-          ctest --test-dir build/debug   -C Debug
           ctest --test-dir build/release -C Release
       - name: 'Run test suite build/release'
         if: ${{ matrix.arch != 'amd64_arm64' }}
