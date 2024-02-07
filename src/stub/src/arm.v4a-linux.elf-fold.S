@@ -235,12 +235,8 @@ no_map_pse:
         mov r9,#0
         mov r10,#0
         mov r11,#0
-        mov r0, #0x58
-        ldr r1, =0x0006b42c
-        strb r0, [r1]
-        mov r0,#0
-        mov r1,#0
-#if 1|DEBUG  //{
+
+        #if 1|DEBUG  //{
 /* Heuristic cache flush: sweep contiguous range to force collisions and evictions. */
         sub r12,sp,#(1<<18)  @ limit: 1/4 MB more
 sweep:
