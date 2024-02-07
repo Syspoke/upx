@@ -171,7 +171,7 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
 //test
         mov r0,#0x58
         ldr r1,[r10]
-        stbr r0,[r1]
+        strb r0,[r1]
 
 // jmp unfolded_code
         ldr r0,[sp,#F_elfaddr]
