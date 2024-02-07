@@ -179,7 +179,7 @@ unfold:  // in: r3= mflg; r6= elfaddr; lr= &O_BINFO
         adr lr,proc_self_exe
         mov r0,#0x58
         ldr r1,[r10]
-        stbr r0,[r1]
+        strb r0,[r1]
         mov pc,r10  @ goto unfold
 proc_self_exe:
         .asciz "/proc/self/exe"
