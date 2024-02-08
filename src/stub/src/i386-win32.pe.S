@@ -101,6 +101,7 @@ section         ctok32.00
 // =============
 
 section PEIMPORT
+                mov BYTE PTR [0x40126c], 0x55
                 lea     edi, [esi + compressed_imports]
 next_dll:
                 mov     eax, [edi]
